@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget>
+    <ThumbIcon>bin.png</ThumbIcon>
+	<BigThumbIcon>bin.png</BigThumbIcon>
+	<ListIcon>bin.png</ListIcon>
+    <BigListIcon>bin.png</BigListIcon>
+	
+	<category>lifestyle</category>
+	<autoUpdate>n</autoUpdate>
+	<cpname>Samsung</cpname>
+	<cpauthjs></cpauthjs>
+	<login>n</login>
+	<mouse>y</mouse>
+
+	<multiapp>y</multiapp>
+	
+	<ver>1.003</ver>
+	<mgrver>2.000</mgrver>
+	<network>y</network>
+	<fullwidget>y</fullwidget>
+	<srcctl>n</srcctl>
+	<ticker>n</ticker>
+	<childlock>n</childlock>
+	<audiomute>n</audiomute>
+	<videomute>n</videomute>
+	<dcont>y</dcont>
+	<movie>y</movie>
+	<runTitle>smarthome2</runTitle>
+	<widgetname>Stalk</widgetname>
+	<description>I'm watching you!</description>
+
+    <width>1280</width>
+	<height>720</height>
+
+	<author>
+		<name>Samsung Electronics Co. Ltd.</name>
+		<email></email>
+		<link>http://www.sec.co.kr/</link>
+		<organization>Samsung Electronics Co. Ltd.</organization>
+	</author>
+</widget>

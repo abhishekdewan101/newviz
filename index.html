@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+        <meta chartset="utf-8">
+        <title>Smart Home</title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+        
+        
+        <script type="text/javascript" language="javascript" src="$MANAGER_WIDGET/Common/API/Widget.js"></script>
+        
+        <script src="js/app.js" charset="utf-8"></script>
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!--        <script src="http://44e01b9f.ngrok.com/target/target-script-min.js#abhishek"></script>-->
+    </head>
+    
+    <body onunload="window.func_onUnload()" style="background:black"> 
+        <center><h1 style="color:white">Welcome to UX Services Stalking Center</h1></center>
+            <div id="div1">
+            </div>
+        <script>
+            
+            var createCircle = function(id,divID,name,background,status){
+               var svg = d3.select("#div1").append("svg").attr("id","svg"+id).attr("width",250).attr("height",300).attr("style","margin:15px")
+                                 
+               
+              var g = svg.append("g").attr("transform","translate(100,100)")
+                                
+              g.append("circle").attr("cx",0).attr("cy",0).attr("r",100).attr("fill","url(#"+id+")");
+              g.append("text").text(name).attr("text-anchor","middle").attr("x",0).attr("y",130).attr("style","fill:white;font-size:25px");
+              g.append("text").text("last seen at: "+status).attr("id","status"+id).attr("text-anchor","middle").attr("x",20).attr("y",160).attr("style","fill:white;font-size:23px");
+                
+                if(name == "Batman"){
+                background = 17;
+                }
+                svg.append("defs").append("pattern").attr("id",id).attr("patternUnits","userSpaceOnUse").attr("width",200).attr("height",200).attr("x",-100).attr("y",-100)
+                   .append("image").attr("xlink:href","images/avatar-"+background+".svg").attr("x",0).attr("y",0).attr("width",200).attr("height",200);
+            };
+            
+            var changeStatus = function(id,status){ 
+                d3.select("#status"+id).text("last seen at: "+status);
+            }
+        
+            
+           var json = d3.json("http://298a49bb.ngrok.com/users",function(error,json){
+                for(var key in json){      
+                     var random = Math.floor(Math.random() * 15)+1;
+                      if(random < 10){random = "0" + random.toString();}
+                  if(json[key].activebeacon !="null"){
+                    createCircle(json[key].uniqueid,"",json[key].name,random,json[key].activebeacon); 
+                  }else{
+                    createCircle(json[key].uniqueid,"",json[key].name,random,"No Where");     
+                  }
+                }
+             });   
+            
+            
+            setInterval(function(){
+                    d3.json("http://298a49bb.ngrok.com/users",function(error,json){
+                for(var key in json){
+                    if(d3.select("#svg"+json[key].uniqueid).empty()){
+//                        console.log("Empty Found");
+                        var random = Math.floor(Math.random() * 15)+1;
+                        if(random < 10){random = "0" + random.toString();}  
+                        createCircle(json[key].uniqueid,"",json[key].name,random,"No Where");     
+                    }
+                    if(json[key].activebeacon != "null"){
+                    changeStatus(json[key].uniqueid,json[key].activebeacon);
+                    }else{
+                    changeStatus(json[key].uniqueid,"No where");    
+                    }
+                  
+                }
+             });   
+            },1500);
+            
+            <!-----SCROLL PAGE_----->
+                
+            
+              var scrolltopbottom =  setInterval(function(){
+                     // 4000 - it will take 4 secound in total from the top of the page to the bottom
+                  setTimeout(function(){
+                    $("html, body").animate({ scrollTop: $(document).height() }, 5000);  
+                  },20000);
+                
+                
+                  setTimeout(function() {
+                   $('html, body').animate({scrollTop:0}, 5000); 
+                },20000);
+
+                },30000);    
+
+        </script>
+    </body>
+</html>

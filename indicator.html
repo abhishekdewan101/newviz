@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+   
+    <head>
+         <script src="bower_components/platform/platform.js"></script>
+         <link rel="import" href="bower_components/polymer/polymer.html">
+    </head>
+
+    <body>
+        <polymer-element name="my-element" attributes="uniqueid name background status">
+            <template>
+                <svg width="250" height="250" style="margin:10px">
+                    <g transform="translate(100,100)">
+                        <circle cx=0 cy=0 r=100 fill="url(#{{uniqueid}})"></circle>
+                       <rect x=-100 y=70 fill="black" width=200 height=30></rect>
+                       <text text-anchor="middle" x=0 y=100 style="fill:white;font-size:25px">{{name}}</text>
+                       <text text-anchor="middle" x=20 y=125 style="fill:white;font-size:23px">last seen at: {{status}}</text>
+                    </g>
+                    
+                    <defs>
+                        <pattern id={{uniqueid}} patternUnits=userSpaceOnUse width=200 height=200 x=-100 y=-100>
+                            <image xlink:href="images/avatar-{{background}}.svg" x=0 y=0 width=200 height="200"></image>
+                        </pattern>
+                    </defs>
+                </svg>
+            </template>
+            <script>
+                Polymer('my-element',{
+                    name: "UserName",
+                    background: "01",
+                    status: "please wait"
+                });
+            </script>
+        </polymer-element>
+    </body>
+</html>
